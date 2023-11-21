@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Bluetooth Scanner Application</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings_save_changes">Save Changes</string>
+    <string name="device_detail_header">Device Detail</string>
+    <string name="bluetooth_status">Bluetooth status :</string>
+    <string name="header_scan_bluetooth">Scan Bluetooth</string>
+    <string name="body_scan_bluetooth">Scan and search bluetoooth devices and connect it.</string>
+    <string name="header_paired_device">Paired Device List</string>
+</resources>

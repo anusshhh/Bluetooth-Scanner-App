@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dimen_7dp"
+        >
+        <ImageView
+            android:id="@+id/iv_setting_icon"
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_retry" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="@dimen/dimen_23sp"
+            app:layout_constraintStart_toEndOf="@id/iv_setting_icon"
+            app:layout_constraintEnd_toStartOf="@id/spinner_settings"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Retry Count" />
+
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="@dimen/dimen_13sp"
+            app:layout_constraintStart_toEndOf="@id/iv_setting_icon"
+            app:layout_constraintEnd_toStartOf="@id/spinner_settings"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="Number of connection attempts" />
+
+        <Spinner
+            android:id="@+id/spinner_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:spinnerMode="dropdown"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
