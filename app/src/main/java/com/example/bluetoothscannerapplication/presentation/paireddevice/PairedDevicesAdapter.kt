@@ -6,16 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bluetoothscannerapplication.databinding.DevicesCardBinding
-import com.example.bluetoothscannerapplication.databinding.SettingsCardBinding
-import com.example.bluetoothscannerapplication.domain.entity.DeviceDetails
-import com.example.bluetoothscannerapplication.presentation.settings.SettingsAdapter
+import com.example.bluetoothscannerapplication.domain.entity.BluetoothDeviceEntity
 
-class PairedDevicesAdapter(private val onConnectButtonClick: (DeviceDetails) -> Unit) : RecyclerView.Adapter<PairedDevicesAdapter.PairedDevicesViewHolder>() {
+class PairedDevicesAdapter(private val onUnpairButtonClick: (BluetoothDeviceEntity) -> Unit) : RecyclerView.Adapter<PairedDevicesAdapter.PairedDevicesViewHolder>() {
     private var _binding: DevicesCardBinding? = null
     private val binding get() = _binding!!
 
-    private var deviceList: MutableList<DeviceDetails> =
-        emptyList<DeviceDetails>().toMutableList()
+    private var deviceList: MutableList<BluetoothDeviceEntity> =
+        emptyList<BluetoothDeviceEntity>().toMutableList()
 
 
     inner class PairedDevicesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -43,7 +41,7 @@ class PairedDevicesAdapter(private val onConnectButtonClick: (DeviceDetails) -> 
         holder.deviceAddress.text = deviceList[position].deviceAddress
 
         holder.connectButton.setOnClickListener {
-            onConnectButtonClick.invoke(deviceList[position])
+            onUnpairButtonClick.invoke(deviceList[position])
         }
     }
 
@@ -52,7 +50,7 @@ class PairedDevicesAdapter(private val onConnectButtonClick: (DeviceDetails) -> 
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitList(deviceList : List<DeviceDetails>){
+    fun submitList(deviceList : List<BluetoothDeviceEntity>){
         this.deviceList=deviceList.toMutableList()
         notifyDataSetChanged()
     }

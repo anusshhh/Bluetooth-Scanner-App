@@ -2,7 +2,7 @@ package com.example.bluetoothscannerapplication.domain.entity
 
 import androidx.annotation.DrawableRes
 
-data class BluetoothSettings(
+data class BluetoothSettingsEntity(
     val title: String,
     val subTitle: String,
     @DrawableRes val icon: Int,

@@ -24,24 +24,28 @@
 
         <TextView
             android:id="@+id/tv_device_name"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dimen_0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_15dp"
             android:fontFamily="@font/lato_bold"
             android:textSize="@dimen/dimen_23sp"
             app:layout_constraintStart_toEndOf="@id/iv_device_icon"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_connect"
             tools:text="Sesh Evo-LE" />
 
         <TextView
             android:id="@+id/tv_device_address"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dimen_0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
             android:fontFamily="@font/lato_regular"
             android:textSize="@dimen/dimen_18sp"
             app:layout_constraintStart_toEndOf="@id/iv_device_icon"
             app:layout_constraintTop_toBottomOf="@id/tv_device_name"
+            app:layout_constraintEnd_toStartOf="@id/btn_connect"
+
             tools:text="41:42:20:90:92:79" />
 
         <com.google.android.material.button.MaterialButton
@@ -51,7 +55,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Pair" />
+            android:text="@string/unpair"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

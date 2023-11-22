@@ -6,17 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bluetoothscannerapplication.databinding.DevicesCardBinding
-import com.example.bluetoothscannerapplication.domain.entity.DeviceDetails
-import com.example.bluetoothscannerapplication.presentation.paireddevice.PairedDevicesAdapter
-import kotlinx.coroutines.NonDisposableHandle.parent
+import com.example.bluetoothscannerapplication.domain.entity.BluetoothDeviceEntity
 
-class DeviceScanAdapter(private val onConnectButtonClick: (DeviceDetails) -> Unit) :
+class DeviceScanAdapter(private val onConnectButtonClick: (BluetoothDeviceEntity) -> Unit) :
     RecyclerView.Adapter<DeviceScanAdapter.DeviceScanViewHolder>() {
     private var _binding: DevicesCardBinding? = null
     private val binding get() = _binding!!
 
-    private var deviceList: MutableList<DeviceDetails> =
-        emptyList<DeviceDetails>().toMutableList()
+    private var deviceList: MutableList<BluetoothDeviceEntity> =
+        emptyList<BluetoothDeviceEntity>().toMutableList()
 
 
     inner class DeviceScanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -50,7 +48,7 @@ class DeviceScanAdapter(private val onConnectButtonClick: (DeviceDetails) -> Uni
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitList(deviceList: List<DeviceDetails>) {
+    fun submitList(deviceList: List<BluetoothDeviceEntity>) {
         this.deviceList = deviceList.toMutableList()
         notifyDataSetChanged()
     }

@@ -7,5 +7,7 @@
     <string name="bluetooth_status">Bluetooth status :</string>
     <string name="header_scan_bluetooth">Scan Bluetooth</string>
     <string name="body_scan_bluetooth">Scan and search bluetoooth devices and connect it.</string>
-    <string name="header_paired_device">Paired Device List</string>
+    <string name="header_paired_device">Paired Device</string>
+    <string name="unpair">Unpair</string>
+    <string name="dashboard_settings">Settings</string>
 </resources>
