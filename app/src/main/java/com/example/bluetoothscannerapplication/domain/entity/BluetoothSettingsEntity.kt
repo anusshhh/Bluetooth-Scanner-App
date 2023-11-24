@@ -7,5 +7,5 @@ data class BluetoothSettingsEntity(
     val subTitle: String,
     @DrawableRes val icon: Int,
     val options: List<Int>,
-    val selectedOption: Int
+    var selectedOption: Int
 )

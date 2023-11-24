@@ -4,19 +4,18 @@ import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bluetoothscannerapplication.BluetoothService
 import com.example.bluetoothscannerapplication.databinding.FragmentPairedDevicesBinding
 import com.example.bluetoothscannerapplication.extensions.checkBluetoothPermission
-import com.example.bluetoothscannerapplication.utils.Converter
 
 class PairedDevicesFragment : Fragment() {
 
@@ -25,28 +24,23 @@ class PairedDevicesFragment : Fragment() {
     lateinit var bluetoothManager: BluetoothManager
     lateinit var bluetoothAdapter: BluetoothAdapter
     lateinit var pairedDevicesRecyclerView: RecyclerView
-    private var pairedDevicesAdapter = PairedDevicesAdapter {
-    }
-
+    lateinit var bluetoothService : BluetoothService
     private val bluetoothPermissionLauncher: ActivityResultLauncher<Array<String>> =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             if (permissions[Manifest.permission.BLUETOOTH] == true &&
                 permissions[Manifest.permission.BLUETOOTH_ADMIN] == true
             ) {
-                // Bluetooth permissions granted, check if Bluetooth is enabled
+                // TODO Bluetooth permissions granted, check if Bluetooth is enabled
             } else {
-                // Handle the case where Bluetooth permissions are not granted
-                // You may want to inform the user or request permissions again
+                // TODO Handle the case where Bluetooth permissions are not granted
+                // TODO You may want to inform the user or request permissions again
             }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bluetoothManager =
-            context?.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-        bluetoothAdapter = bluetoothManager.adapter
+         bluetoothService = BluetoothService(requireContext())
         arguments?.let {
-
         }
     }
 
@@ -62,18 +56,19 @@ class PairedDevicesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         pairedDevicesRecyclerView = binding.rvPairedDevice
+        val pairedDevicesAdapter = PairedDevicesAdapter {
+            bluetoothService.unpairDevice(it)
+
+        }
         pairedDevicesRecyclerView.adapter = pairedDevicesAdapter
         pairedDevicesRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
+
         if (requireContext().checkBluetoothPermission()) {
-            val deviceList = mutableListOf<com.example.bluetoothscannerapplication.domain.entity.BluetoothDeviceEntity>()
-            val pairedDevices = getPairedDevices()?: emptyList()
+            val pairedDevices = getPairedDevices()
             if (pairedDevices.isNotEmpty()) {
-                for (device in pairedDevices) {
-                    deviceList.add(Converter.convertBluetoothClassToDeviceDetails(device))
-                }
-                pairedDevicesAdapter.submitList(deviceList)
+                pairedDevicesAdapter.submitList(pairedDevices)
             } else {
                 // TODO
             }
@@ -82,21 +77,10 @@ class PairedDevicesFragment : Fragment() {
         }
     }
 
-    private fun getPairedDevices(): List<BluetoothDevice>? {
-        requireContext().checkBluetoothPermission()
-        return bluetoothAdapter.bondedDevices.toList()
+    private fun getPairedDevices(): List<BluetoothDevice> {
+        return bluetoothService.getAllPairedDevices().toList()
     }
 
-
-    private fun checkBluetoothEnabled() {
-        if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled) {
-            // Bluetooth is not enabled, request to enable Bluetooth
-            // TODO REQUEST BLUETOOTH TO BE ENABLED
-        } else {
-            // Bluetooth is enabled, get the list of paired devices
-            getPairedDevices()
-        }
-    }
 
     fun requestPermission() {
         bluetoothPermissionLauncher.launch(
@@ -105,8 +89,5 @@ class PairedDevicesFragment : Fragment() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
         )
-
     }
-
-
 }
